@@ -13,11 +13,13 @@ args = parser.parse_args()
 address_of_region = AddressOfRegion()
 try:
     download_file(DEFAULTS['APNIC_URL'], DEFAULTS['APNIC_FILE'])
+    print("File " + DEFAULTS['APNIC_FILE'] + " downloading complete.")
 except:
     print("apnic file download failed! Skip download.")
 
 try:
     download_file(DEFAULTS['IPIPNET_URL'], DEFAULTS['IPIPNET_FILE'])
+    print("File " + DEFAULTS['IPIPNET_FILE'] + " downloading complete.")
 except:
     print("ipipnet file download failed! Skip download.")
 
@@ -33,20 +35,26 @@ with open(DEFAULTS['APNIC_FILE'], "r") as fanpic:
             item = "%s/%s" % (line[3], line[4])
             item = IPv6Network(item)
             AddressOfRegion.mark_node(address_of_region.root_v6, (item,))
+print("APNIC file process complete.")
 
 with open(DEFAULTS['IPIPNET_FILE'], "r") as fipipnet:
     for line in fipipnet:
         line = line.strip('\n')
         item = IPv4Network(line)
         AddressOfRegion.mark_node(address_of_region.root_v4, (item,))
+print("IPIPNET file process complete.")
 
 AddressOfRegion.mark_node(address_of_region.root_v4, RESERVED)
+print("IPV4 reserved address process complete.")
 AddressOfRegion.mark_node(address_of_region.root_v6, RESERVED_V6)
+print("IPV6 reserved address process complete.")
 
 with open(DEFAULTS['IPV4CONF'], "w") as fp4:
     dump_bird(address_of_region.root_v4, fp4)
+    print(DEFAULTS['IPV4CONF'] + "dump complete.")
 with open(DEFAULTS['IPV6CONF'], "w") as fp6:
     dump_bird(address_of_region.root_v6, fp6)
+    print(DEFAULTS['IPV6CONF'] + "dump complete.")
 
 if args.sshremote:
     transport = paramiko.Transport((DEFAULTS['HOST'], DEFAULTS['PORT']))  # 获取Transport实例
@@ -57,3 +65,4 @@ if args.sshremote:
     sftp.put(DEFAULTS['IPV6CONF'], "/etc/routes6.conf")
 
     transport.close()
+    print("Transport to " + DEFAULTS['HOST'] + " finish.")

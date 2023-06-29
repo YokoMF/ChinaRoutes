@@ -11,8 +11,11 @@ RUN cd  /tmp \
 COPY  china_ip_list \
       delegated-apnic-latest \
       ipv4-address-space.csv  \
-      main.py \
       routes4.conf \
-      routes6.conf .
+      routes6.conf \
+      constconf.py \
+      main.py   \
+      ./
+COPY  modules  ./modules
 
 CMD ["python"]
