@@ -8,18 +8,22 @@ from ipaddress import IPv4Network, IPv6Network
 
 parser = argparse.ArgumentParser(description='Generate non-China routes for BIRD.')
 parser.add_argument('--sshremote', help='SSH to Remote', action="store_true")
+parser.add_argument('--keepapnic', help='Do not download apnic file', action="store_true")
+parser.add_argument('--keepipipnet', help='Do not download ipipnet file', action="store_true")
 args = parser.parse_args()
 
 address_of_region = AddressOfRegion()
 try:
-    download_file(DEFAULTS['APNIC_URL'], DEFAULTS['APNIC_FILE'])
-    print("File " + DEFAULTS['APNIC_FILE'] + " downloading complete.")
+    if not args.keepapnic:
+        download_file(DEFAULTS['APNIC_URL'], DEFAULTS['APNIC_FILE'])
+        print("File " + DEFAULTS['APNIC_FILE'] + " downloading complete.")
 except:
     print("apnic file download failed! Skip download.")
 
 try:
-    download_file(DEFAULTS['IPIPNET_URL'], DEFAULTS['IPIPNET_FILE'])
-    print("File " + DEFAULTS['IPIPNET_FILE'] + " downloading complete.")
+    if not args.keepipipnet:
+        download_file(DEFAULTS['IPIPNET_URL'], DEFAULTS['IPIPNET_FILE'])
+        print("File " + DEFAULTS['IPIPNET_FILE'] + " downloading complete.")
 except:
     print("ipipnet file download failed! Skip download.")
 

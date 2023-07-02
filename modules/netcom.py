@@ -1,5 +1,6 @@
 import csv
 from ipaddress import IPv4Network
+from constconf import IPV6_UNICAST
 
 
 class Node:
@@ -16,7 +17,7 @@ class Node:
 class AddressOfRegion:
     def __init__(self):
         self.root_v4 = list()
-        self.root_v6 = list()
+        self.root_v6 = [Node(IPV6_UNICAST)]
         with open("ipv4-address-space.csv", newline='') as fp:
             fp.readline()  # skip the title
 
