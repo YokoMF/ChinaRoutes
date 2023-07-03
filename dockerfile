@@ -13,8 +13,7 @@ COPY  china_ip_list \
       ipv4-address-space.csv  \
       routes4.conf \
       routes6.conf \
-      constconf.py \
-      main.py   \
+      *.py \
       ./
 COPY  modules  ./modules
 
