@@ -61,7 +61,7 @@ with open(DEFAULTS['IPV6CONF'], "w") as fp6:
     print(DEFAULTS['IPV6CONF'] + "dump complete.")
 
 if args.sshremote:
-    transport = paramiko.Transport((DEFAULTS['HOST'], DEFAULTS['PORT']))  # 获取Transport实例
+    transport = paramiko.Transport((DEFAULTS['HOST'], int(DEFAULTS['PORT'])))  # 获取Transport实例
     transport.connect(username=DEFAULTS['USER'], password=DEFAULTS['PASSWORD'])  # 建立连接
 
     sftp = paramiko.SFTPClient.from_transport(transport)
