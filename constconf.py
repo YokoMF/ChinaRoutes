@@ -11,8 +11,8 @@ DEFAULTS = {
     'IPV4CONF': "routes4.conf",
     'IPV6CONF': "routes6.conf",
     'HOST': "XXXX.XXXX.XXXX.XXXX",
-    'PORT': 'XX',
-    'USER': "XXX",
+    'PORT': '22',
+    'USER': "root",
     'PASSWORD': "XXXXXX"
 }
 
