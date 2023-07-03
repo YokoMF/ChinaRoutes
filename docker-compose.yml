@@ -1,0 +1,13 @@
+version: '3'
+services:
+  chinaroutes:
+    image: harbor.homelab.com/soho/chinaroutes
+    container_name: chinaroutes
+    environment:
+      - HOST=192.168.88.255
+      - PASSWORD=123456
+    volumes:
+      - /opt/ChinaRoutes/routes4.conf:/ChinaRoutes/routes4.conf
+      - /opt/ChinaRoutes/routes6.conf:/ChinaRoutes/routes6.conf
+      - /root/.ssh/known_hosts:/root/.ssh/known_hosts
+    command: python main.py --sshremote --keepapnic
