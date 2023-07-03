@@ -26,3 +26,8 @@
 docker run --rm chinaroutes python checkip
 ```
 > 请使用`docker run --rm chinaroutes python checkip -h`查看可用参数
+
+#### 参考项目
+本项目参考了以下内容，感谢作者们无私的分享！  
+[nchnroutes海外地址表](https://github.com/dndx/nchnroutes)  
+[RouterOS，OSPF 和OpenWRT给国内外 IP 分流](https://www.truenasscale.com/2021/12/13/195.html)
